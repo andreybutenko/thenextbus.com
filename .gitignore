@@ -1,3 +1,8 @@
+# Do not commit large raw files
+thenextbus-gfts-preprocess/raw/
+
+.DS_Store
+
 # Logs
 logs
 *.log
