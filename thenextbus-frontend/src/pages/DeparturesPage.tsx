@@ -9,7 +9,7 @@ import { DepartureDisplay } from '../components/DepartureDisplay';
 import { Wrapper } from '../components/Wrapper';
 import { SECOND_MS } from '../hooks/useInterval';
 import { useRealTimeData } from '../hooks/useRealTimeData';
-import { getStopTimeUpdates } from '../utils/rtFilters';
+import { getDepartures } from '../utils/rtFilters';
 
 dayjs.extend(relativeTime);
 
@@ -20,18 +20,18 @@ export function DeparturesPage(): React.ReactElement {
 
     const realTimeData = useRealTimeData(BASE_KCM_RT_ENDPOINT);
 
-    const nextArrivals = useMemo<number[]>(() => {
+    const nextArrivals = useMemo(() => {
         if (realTimeData.state !== 'success' && realTimeData.state !== 'refetching') {
             return [];
         }
 
-        const stopTimes = getStopTimeUpdates(realTimeData.data, {
+        const stopTimes = getDepartures(realTimeData.data, {
             stopId: `${stopId}`,
             laterThan: Date.now() / SECOND_MS,
             scheduleRelationship: 'SCHEDULED',
-        }).map((stopTime) => stopTime.departure!.time);
+        });
 
-        return stopTimes;
+        return stopTimes.sort((a, b) => a.departureTime - b.departureTime);
     }, [realTimeData]);
 
     return (
@@ -43,8 +43,12 @@ export function DeparturesPage(): React.ReactElement {
                     </Header>
                 }
             >
-                {nextArrivals.map((time, index) => (
-                    <DepartureDisplay key={index} time={time} />
+                {nextArrivals.map((data, index) => (
+                    <DepartureDisplay
+                        key={index}
+                        departureTime={data.departureTime}
+                        routeId={data.routeId}
+                    />
                 ))}
             </ContentLayout>
         </Wrapper>

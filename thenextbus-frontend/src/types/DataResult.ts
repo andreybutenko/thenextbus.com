@@ -22,7 +22,7 @@ export type LoadingDataResult = {
     error?: never;
 };
 
-export type DataResult<TData, TError> =
+export type DataResult<TData, TError = unknown> =
     | SuccessDataResult<TData>
     | RefetchingDataResult<TData>
     | ErrorDataResult<TError>
