@@ -9,7 +9,7 @@ type GetStopTimeUpdateFilterParams = {
 export function getDepartures(
     data: FeedMessage,
     params: GetStopTimeUpdateFilterParams
-): { routeId: string; departureTime: number }[] {
+): { routeId: string; tripId: string; departureTime: number }[] {
     function filterStopTimeUpdate(stopTimeUpdate: StopTimeUpdate) {
         return (
             stopTimeUpdate.departure?.time &&
@@ -26,6 +26,7 @@ export function getDepartures(
         )
         .map((entity) => ({
             routeId: entity.trip_update!.trip.route_id,
+            tripId: entity.trip_update!.trip.trip_id,
             departureTime:
                 entity.trip_update!.stop_time_update!.find(filterStopTimeUpdate)!.departure!.time,
         }));

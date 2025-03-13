@@ -35,7 +35,7 @@ export function DeparturesPage(): React.ReactElement {
     }, [realTimeData]);
 
     return (
-        <Wrapper contentType="default">
+        <Wrapper contentType="default" disableContentPaddings={true}>
             <ContentLayout
                 header={
                     <Header variant="h1">
@@ -47,6 +47,7 @@ export function DeparturesPage(): React.ReactElement {
                     <DepartureDisplay
                         key={index}
                         departureTime={data.departureTime}
+                        tripId={data.tripId}
                         routeId={data.routeId}
                     />
                 ))}

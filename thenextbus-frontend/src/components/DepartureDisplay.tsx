@@ -1,11 +1,11 @@
-import Badge from '@cloudscape-design/components/badge';
-import Box from '@cloudscape-design/components/box';
+import { Box } from '@cloudscape-design/components';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { SECOND_MS, useInterval } from '../hooks/useInterval';
 import { useRouteData } from '../routeData/useRouteData';
+import styles from './DepartureDisplay.module.css';
 
-export type DepartureDisplayProps = { routeId: string; departureTime: number };
+export type DepartureDisplayProps = { routeId: string; tripId: string; departureTime: number };
 
 type TimeDetails = {
     time: string;
@@ -13,7 +13,7 @@ type TimeDetails = {
 };
 
 export function DepartureDisplay(props: DepartureDisplayProps): React.ReactElement {
-    const { routeIdDetails } = useRouteData();
+    const { routeIdDetails, tripIdHeadboards } = useRouteData();
     const [timeDetails, setTimeDetails] = useState<TimeDetails>({ time: '', relativeTime: '' });
 
     function computeTimeDetails() {
@@ -21,25 +21,44 @@ export function DepartureDisplay(props: DepartureDisplayProps): React.ReactEleme
 
         setTimeDetails({
             time: date.format('hh:mma'),
-            relativeTime: date.fromNow(),
+            relativeTime: `${date.diff(dayjs(), 'minutes')}`,
         });
     }
 
     useInterval(computeTimeDetails, 5 * SECOND_MS);
 
     const routeDetails = routeIdDetails.data?.[props.routeId]?.[0];
+    const headboard = tripIdHeadboards.data?.[props.tripId]?.[0].ths;
+
+    const routeNumber = useMemo<string | undefined>(() => {
+        const routeShortName = routeDetails?.route_short_name;
+
+        if (routeShortName === undefined) {
+            return undefined;
+        }
+
+        if (routeShortName.endsWith(' Line')) {
+            return routeShortName.replace(' Line', '');
+        }
+
+        return routeShortName;
+    }, [routeDetails?.route_short_name]);
+    const showRouteNumber = routeNumber !== undefined;
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <div style={{ flexBasis: '80px' }}>
-                <Badge color="blue">{routeDetails?.route_short_name}</Badge>
+        <Box>
+            <div className={styles.departureDisplay}>
+                {showRouteNumber && (
+                    <div className={styles.routeNumber}>
+                        <span>{routeNumber}</span>
+                    </div>
+                )}
+                <div className={styles.tripHeadboard}>{headboard} more more more more text</div>
+                <div className={styles.departureTime}>
+                    <span className={styles.departureTimeValue}>{timeDetails.relativeTime}</span>
+                    <span className={styles.departureTimeUnit}>min</span>
+                </div>
             </div>
-            <Box>{routeIdDetails.data?.[props.routeId]?.[0]?.route_desc}</Box>
-            <div style={{ flexGrow: 1, textAlign: 'right' }}>
-                <Box variant="strong">
-                    {timeDetails.time} - {timeDetails.relativeTime}
-                </Box>
-            </div>
-        </div>
+        </Box>
     );
 }

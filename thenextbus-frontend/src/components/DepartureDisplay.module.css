@@ -1,0 +1,48 @@
+/** https://coolors.co/palette/8ecae6-219ebc-023047-ffb703-fb8500 */
+.departureDisplay {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 100px;
+    padding: 16px;
+    border-bottom: 1px solid #023047;
+}
+
+.routeNumber {
+    font-size: 32px;
+    background-color: #8ecae6;
+
+    width: 80px;
+    height: 80px;
+    flex-basis: 80px;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tripHeadboard {
+    font-size: 32px;
+    line-height: 1em;
+
+    flex: 1;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.departureTime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.departureTimeValue {
+    font-size: 48px;
+    line-height: 1em;
+}
+
+.departureTimeUnit {
+
+}

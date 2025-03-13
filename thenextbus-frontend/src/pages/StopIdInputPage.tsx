@@ -39,6 +39,7 @@ export function StopIdInputPage() {
                             <Input
                                 type="text"
                                 value={stopId}
+                                placeholder="431"
                                 onChange={({ detail }) => setStopId(detail.value)}
                             />
                         </FormField>

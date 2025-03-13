@@ -4,3 +4,9 @@ export type RouteIdDetailsData = {
         route_desc: string;
     }[];
 };
+
+export type TripIdHeadboardsData = {
+    [tripId: string]: {
+        ths: string;
+    }[];
+};

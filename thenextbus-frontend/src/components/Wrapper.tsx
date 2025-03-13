@@ -2,17 +2,9 @@ import AppLayout, { AppLayoutProps } from '@cloudscape-design/components/app-lay
 
 export function Wrapper({
     children,
-    contentType,
+    ...props
 }: {
     children: React.ReactElement;
-    contentType: AppLayoutProps['contentType'];
-}) {
-    return (
-        <AppLayout
-            contentType={contentType}
-            content={children}
-            navigationHide={true}
-            toolsHide={true}
-        />
-    );
+} & Omit<AppLayoutProps, 'content'>) {
+    return <AppLayout content={children} navigationHide={true} toolsHide={true} {...props} />;
 }
