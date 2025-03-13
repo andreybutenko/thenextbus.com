@@ -1,7 +1,7 @@
 import { FeedMessage, StopTimeUpdate } from 'gtfs-types';
 
 type GetStopTimeUpdateFilterParams = {
-    stopId: string;
+    stopIds: string[];
     laterThan: number;
     scheduleRelationship: 'SCHEDULED' | 'SKIPPED' | 'NO_DATA';
 };
@@ -14,7 +14,7 @@ export function getDepartures(
         return (
             stopTimeUpdate.departure?.time &&
             stopTimeUpdate.departure?.time >= params.laterThan &&
-            stopTimeUpdate.stop_id === params.stopId &&
+            params.stopIds.includes(stopTimeUpdate.stop_id) &&
             (stopTimeUpdate.schedule_relationship as unknown as string) ===
                 params.scheduleRelationship
         );
@@ -30,20 +30,4 @@ export function getDepartures(
             departureTime:
                 entity.trip_update!.stop_time_update!.find(filterStopTimeUpdate)!.departure!.time,
         }));
-}
-
-export function getStopTimeUpdates(
-    data: FeedMessage,
-    params: GetStopTimeUpdateFilterParams
-): StopTimeUpdate[] {
-    return data
-        .entity!.flatMap((entity) => entity.trip_update!.stop_time_update!)
-        .filter(
-            (stopTimeUpdate) =>
-                stopTimeUpdate.departure?.time &&
-                stopTimeUpdate.departure?.time >= params.laterThan &&
-                stopTimeUpdate.stop_id === params.stopId &&
-                (stopTimeUpdate.schedule_relationship as unknown as string) ===
-                    params.scheduleRelationship
-        );
 }

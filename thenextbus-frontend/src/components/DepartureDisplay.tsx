@@ -53,7 +53,7 @@ export function DepartureDisplay(props: DepartureDisplayProps): React.ReactEleme
                         <span>{routeNumber}</span>
                     </div>
                 )}
-                <div className={styles.tripHeadboard}>{headboard} more more more more text</div>
+                <div className={styles.tripHeadboard}>{headboard}</div>
                 <div className={styles.departureTime}>
                     <span className={styles.departureTimeValue}>{timeDetails.relativeTime}</span>
                     <span className={styles.departureTimeUnit}>min</span>

@@ -26,7 +26,7 @@ export function DeparturesPage(): React.ReactElement {
         }
 
         const stopTimes = getDepartures(realTimeData.data, {
-            stopId: `${stopId}`,
+            stopIds: stopId !== undefined ? stopId.split(',') : [],
             laterThan: Date.now() / SECOND_MS,
             scheduleRelationship: 'SCHEDULED',
         });
