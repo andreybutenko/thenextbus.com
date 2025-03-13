@@ -1,6 +1,6 @@
 # Do not commit large raw files
 thenextbus-gfts-preprocess/raw/
-
+thenextbus-gfts-preprocess/.Rhistory
 .DS_Store
 
 # Logs

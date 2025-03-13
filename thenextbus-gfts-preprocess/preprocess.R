@@ -41,9 +41,7 @@ write(trip_id_details_map, './processed/trip_id_details.json')
 # trip_id_headboard.json
 # Map from trip ID to headboard
 
-trip_id_headboard_df <- stop_times %>%
-  inner_join(trips, by = "trip_id") %>%
-  inner_join(routes, by = "route_id") %>%
+trip_id_headboard_df <- trips %>% 
   select(trip_id, trip_headsign) %>%
   unique() %>% 
   rename(ths = trip_headsign)
