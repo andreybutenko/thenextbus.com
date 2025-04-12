@@ -1,0 +1,66 @@
+.weatherDetailsRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 100px;
+    padding: 16px;
+    border-bottom: 1px solid #023047;
+}
+
+.weatherDetailsRow .timestamp {
+    width: 100px;
+    flex-basis: 100px;
+    margin-right: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.weatherDetailsRow .timestamp .time {
+    font-size: 32px;
+    line-height: 1em;
+    text-align: center;
+}
+
+.weatherDetailsRow .iconWrapper {
+    background-color: #219EBC;
+
+    width: 80px;
+    height: 80px;
+    flex-basis: 80px;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weatherDetailsRow .primaryContent {
+    flex: 1;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.weatherDetailsRow .primaryContent .description {
+    font-size: 32px;
+    line-height: 1em;
+}
+
+.weatherDetailsRow .iconWrapper img {
+    width: 64px;
+    height: 64px;
+}
+
+.weatherDetailsRow .temperature {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.weatherDetailsRow .temperature .temperatureValue {
+    font-size: 48px;
+    line-height: 1em;
+}

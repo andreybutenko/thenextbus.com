@@ -1,16 +1,33 @@
 .departuresPageHeader {
     display: flex;
     flex-direction: row;
-    background-color: #8ecae6;
     padding: 20px;
     font-size: 32px;
 }
 
-.departuresPageHeader h1 {
-    flex: 1;
-    text-align: center;
+.departuresHeader {
+    background-color: #8ecae6;
+}
+.weatherHeader {
+    background-color: #219EBC;
 }
 
-.departuresPageHeader button {
+.departuresPageHeader h1 {
+    flex: 1;
+}
+
+.departuresPageHeader .actions {
     float: right;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.departuresPageHeader .actions > * {
+    margin-left: 16px;
+}
+
+.departuresPageHeader .actions [class*="awsui_segment-part"] {
+    background-color: white;
 }
