@@ -1,6 +1,8 @@
 library(tidyverse)
 library(jsonlite)
 library(leaflet)
+library(geojsonio)
+library(sf)
 
 # Routes describe scheduled bus routes
 # We'll use it to display route names to customers
@@ -17,9 +19,9 @@ shapes <- read.csv('./raw/shapes.txt')
 # https://gtfs.org/documentation/schedule/reference/#tripstxt
 trips <- read.csv('./raw/trips.txt')
 
-# Create combined dataset
+# Create combined dataset (CSV)
 
-routeshapes <-
+routeshapes_csv <-
   # Start with routes dataset
   routes %>% 
   
@@ -39,26 +41,41 @@ routeshapes <-
 
 # Save combined dataset
 write.csv(
-  routeshapes,
+  routeshapes_csv,
   file = './route-map/routeshapes.csv',
   row.names = FALSE
 )
 
-# To test our data - let's visualize it
+# Visualize combined dataset (GeoJSON)
 
-map <- leaflet()
+map_csv <- leaflet()
 
 # Add each shape as a polyline
-for (id in unique(combined$shape_id)) {
-  shape_data <- combined %>%
+for (id in unique(routeshapes_csv$shape_id)) {
+  shape_data <- routeshapes_csv %>%
     filter(shape_id == id)
   
-  map <- map %>%
-    addPolylines(lng = shape_data$shape_pt_lon,
-                 lat = shape_data$shape_pt_lat,
+  map_csv <- map_csv %>%
+    addPolylines(lng = routeshapes_csv$shape_pt_lon,
+                 lat = routeshapes_csv$shape_pt_lat,
                  label = paste("Shape ID:", id),
                  weight = 3, color = "blue", opacity = 0.7)
 }
 
-# Show the map
-map
+map_csv
+
+# Transform to GeoJSON
+
+# Group by route_id and route_long_name to make one line per route
+routeshapes_geojson <- routeshapes_csv %>%
+  arrange(route_id, shape_pt_sequence) %>%
+  group_by(route_id, route_short_name, route_desc) %>%
+  nest() %>%
+  mutate(geometry = purrr::map(
+    data,
+    ~ st_linestring(as.matrix(select(.x, shape_pt_lon, shape_pt_lat)))
+  )) %>%
+  select(route_id, route_short_name, route_desc, geometry) %>%
+  st_sf(crs = 4326)
+
+geojson_write(routeshapes_geojson, file = "./route-map/routeshapes.geojson")
