@@ -158,19 +158,13 @@
   "100073": [
     {
       "route_short_name": "182",
-      "route_desc": "Northeast Tacoma - Federal Way TC"
+      "route_desc": "Northeast Tacoma - Federal Way"
     }
   ],
   "100074": [
     {
       "route_short_name": "183",
-      "route_desc": "Federal Way TC - Star Lake - Kent Station"
-    }
-  ],
-  "100078": [
-    {
-      "route_short_name": "187",
-      "route_desc": "Federal Way - Twin Lakes"
+      "route_desc": "Federal Way - Star Lake - Kent Station"
     }
   ],
   "100089": [
@@ -203,12 +197,6 @@
       "route_desc": "Westwood Villge-Shorewood-Gatewood-Alaska Junction"
     }
   ],
-  "100113": [
-    {
-      "route_short_name": "221",
-      "route_desc": "Education Hill - Crossroads - Eastgate"
-    }
-  ],
   "100132": [
     {
       "route_short_name": "24",
@@ -218,25 +206,13 @@
   "100133": [
     {
       "route_short_name": "240",
-      "route_desc": "Bellevue Transit Center - Renton Transit Center"
+      "route_desc": "Bellevue TC-South Bellevue-Eastgate-Renton TC"
     }
   ],
   "100136": [
     {
       "route_short_name": "245",
-      "route_desc": "Kirkland Transit Center - Crossroads - Factoria"
-    }
-  ],
-  "100137": [
-    {
-      "route_short_name": "246",
-      "route_desc": "Eastgate P&R-Somerset-Bellevue TC-Clyde Hill"
-    }
-  ],
-  "100139": [
-    {
-      "route_short_name": "249",
-      "route_desc": "Overlake - South Bellevue Station"
+      "route_desc": "Kirkland Transit Center - Eastgate P&R"
     }
   ],
   "100146": [
@@ -245,16 +221,10 @@
       "route_desc": "Totem Lake TC-Kirkand TC-UW Link Sta-Univ Dist"
     }
   ],
-  "100148": [
-    {
-      "route_short_name": "257",
-      "route_desc": "Brickyard P&R - Downtown Seattle"
-    }
-  ],
   "100160": [
     {
       "route_short_name": "269",
-      "route_desc": "Issaquah Transit Center - Overlake P&R"
+      "route_desc": "Issaquah Transit Center - Marymoor Village Station"
     }
   ],
   "100161": [
@@ -291,12 +261,6 @@
     {
       "route_short_name": "31",
       "route_desc": "Children's Hospital - Fremont - Central Magnolia"
-    }
-  ],
-  "100186": [
-    {
-      "route_short_name": "311",
-      "route_desc": "Woodinville - Downtown Seattle"
     }
   ],
   "100193": [
@@ -488,13 +452,13 @@
   "100290": [
     {
       "route_short_name": "901",
-      "route_desc": "Mirror Lake - Federal Way TC"
+      "route_desc": "Mirror Lake - Federal Way"
     }
   ],
   "100292": [
     {
       "route_short_name": "903",
-      "route_desc": "Twin Lakes - Federal Way TC"
+      "route_desc": "Twin Lakes - Federal Way"
     }
   ],
   "100297": [
@@ -602,7 +566,7 @@
   "100495": [
     {
       "route_short_name": "193",
-      "route_desc": "Federal Way S 320th P&R-Federal Way TC-First Hill"
+      "route_desc": "Federal Way S 320th P&R-Federal Way -First Hill"
     }
   ],
   "100496": [
@@ -620,7 +584,7 @@
   "100512": [
     {
       "route_short_name": "A Line",
-      "route_desc": "Federal Way TC - SeaTac - Tukwila Intl Blvd Sta"
+      "route_desc": "Federal Way - SeaTac - Tukwila Intl Blvd Sta"
     }
   ],
   "102548": [
@@ -632,13 +596,7 @@
   "102552": [
     {
       "route_short_name": "226",
-      "route_desc": "Eastgate P&R-Crossroads-Overlake-Bellevue TC"
-    }
-  ],
-  "102554": [
-    {
-      "route_short_name": "241",
-      "route_desc": "Eastgate P&R - Bellevue Transit Center"
+      "route_desc": "South Bellevue - Eastgate P&R - Bellevue TC"
     }
   ],
   "102555": [
@@ -651,6 +609,12 @@
     {
       "route_short_name": "915",
       "route_desc": "Enumclaw - Auburn Station"
+    }
+  ],
+  "102558": [
+    {
+      "route_short_name": "931",
+      "route_desc": "UW/Cascadia College - Duvall"
     }
   ],
   "102561": [
@@ -668,7 +632,7 @@
   "102576": [
     {
       "route_short_name": "C Line",
-      "route_desc": "Valley St/Fairview Av N - SW Barton St/26 Av SW"
+      "route_desc": "Westwood Village - Downtown Seattle"
     }
   ],
   "102581": [
@@ -745,7 +709,7 @@
   ],
   "102699": [
     {
-      "route_short_name": "SVT",
+      "route_short_name": "Valley Shuttle",
       "route_desc": "No. Bend-Snoqualmie-Fall City-Carnation-Duvall"
     }
   ],
@@ -855,6 +819,42 @@
     {
       "route_short_name": "61",
       "route_desc": "Lake City - Northgate - Greenwood"
+    }
+  ],
+  "102752": [
+    {
+      "route_short_name": "223",
+      "route_desc": "Eastgate P&R - Downtown Redmond Station"
+    }
+  ],
+  "102753": [
+    {
+      "route_short_name": "222",
+      "route_desc": "Redmond Technology - Education Hill - Cottage Lake"
+    }
+  ],
+  "102754": [
+    {
+      "route_short_name": "256",
+      "route_desc": "Woodinville - Downtown Seattle"
+    }
+  ],
+  "102755": [
+    {
+      "route_short_name": "203",
+      "route_desc": "Issaquah Highlands - South Bellevue Station"
+    }
+  ],
+  "102756": [
+    {
+      "route_short_name": "249",
+      "route_desc": "Spring District Station - South Bellevue Station"
+    }
+  ],
+  "102757": [
+    {
+      "route_short_name": "187",
+      "route_desc": "Federal Way - Twin Lakes"
     }
   ]
 }

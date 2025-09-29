@@ -1,6 +1,8 @@
 library(tidyverse)
 library(jsonlite)
 
+# First: get raw data from https://metro.kingcounty.gov/gtfs/
+
 routes <- read.csv('./raw/routes.txt')
 stops <- read.csv('./raw/stops.txt')
 stop_times <- read.csv('./raw/stop_times.txt')
