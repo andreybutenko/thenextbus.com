@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DepartureDisplay } from '../components/DepartureDisplay';
 import { Wrapper } from '../components/Wrapper';
 import { WeatherDetailsRow } from '../components/weather/WeatherDetailsRow';
+import { BASE_KCM_RT_ENDPOINT, WEATHER_ENDPOINT } from '../constants/endpoints';
 import { SECOND_MS } from '../hooks/useInterval';
 import { useRealTimeData } from '../hooks/useRealTimeData';
 import { useWeatherData } from '../hooks/useWeatherData';
@@ -16,9 +17,6 @@ import { getDepartures } from '../utils/rtFilters';
 import styles from './DeparturesPage.module.css';
 
 dayjs.extend(relativeTime);
-
-const BASE_KCM_RT_ENDPOINT = 'https://d2dw2n9grzfy70.cloudfront.net/tripupdates.json';
-const WEATHER_ENDPOINT = 'https://d2dw2n9grzfy70.cloudfront.net/weather.json';
 
 export function DeparturesPage(): React.ReactElement {
     const { stopId } = useParams();

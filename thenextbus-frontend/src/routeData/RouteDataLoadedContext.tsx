@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react';
+import { ROUTE_ID_DETAILS, TRIP_ID_HEADBOARDS } from '../constants/endpoints';
 import { useStaticData } from '../hooks/useStaticData';
 import { RouteIdDetailsData, TripIdHeadboardsData } from '../types/RouteIdDetailsData';
 import { RouteData, RouteDataContext } from './RouteDataContext';
-
-const ROUTE_ID_DETAILS = 'https://d145btbn40ezqn.cloudfront.net/route_id_details.json';
-const TRIP_ID_HEADBOARDS = 'https://d145btbn40ezqn.cloudfront.net/trip_id_headboards.json';
 
 export type RouteDataLoadedContextProps = React.PropsWithChildren;
 
