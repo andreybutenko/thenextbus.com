@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { DepartureDisplay } from '../components/DepartureDisplay';
+import { DepartureDisplaySection } from '../components/DepartureDisplaySection';
 import { Wrapper } from '../components/Wrapper';
 import { WeatherDetailsRow } from '../components/weather/WeatherDetailsRow';
 import { BASE_KCM_RT_ENDPOINT, WEATHER_ENDPOINT } from '../constants/endpoints';
@@ -37,18 +37,25 @@ export function DeparturesPage(): React.ReactElement {
 
     const [view, setView] = useState<'weather' | 'departures'>('departures');
 
-    const nextArrivals = useMemo(() => {
+    const nextArrivalsByStopId = useMemo(() => {
         if (realTimeData.state !== 'success' && realTimeData.state !== 'refetching') {
             return [];
         }
 
-        const stopTimes = getDepartures(realTimeData.data, {
-            stopIds: stopId !== undefined ? stopId.split(',') : [],
-            laterThan: Date.now() / SECOND_MS,
-            scheduleRelationship: 'SCHEDULED',
-        });
+        const stopIds = stopId !== undefined ? stopId.split(',') : [];
 
-        return stopTimes.sort((a, b) => a.departureTime - b.departureTime);
+        return stopIds.map((stopId) => {
+            const stopTimes = getDepartures(realTimeData.data, {
+                stopIds: [stopId],
+                laterThan: Date.now() / SECOND_MS,
+                scheduleRelationship: 'SCHEDULED',
+            });
+
+            return {
+                stopId,
+                stopTimes: stopTimes.sort((a, b) => a.departureTime - b.departureTime),
+            };
+        });
     }, [realTimeData]);
 
     const hourlyWeatherDetails = useMemo(() => {
@@ -60,52 +67,55 @@ export function DeparturesPage(): React.ReactElement {
     }, [realTimeData]);
 
     return (
-        <Wrapper contentType="default" disableContentPaddings={true}>
-            <ContentLayout
-                header={
-                    <div
-                        className={`${styles.departuresPageHeader} ${
-                            view === 'departures' ? styles.departuresHeader : styles.weatherHeader
-                        }`}
-                    >
-                        <Box variant="h1">
-                            {view === 'departures' ? 'Upcoming departures' : 'Hourly forecast'}
-                        </Box>
-                        <div className={styles.actions}>
-                            <SegmentedControl
-                                selectedId={view}
-                                onChange={({ detail }) =>
-                                    setView(detail.selectedId as 'weather' | 'departures')
-                                }
-                                options={[
-                                    { text: 'Departures', id: 'departures' },
-                                    { text: 'Weather', id: 'weather' },
-                                ]}
-                            />
-                            <Button
-                                iconName={isFullScreen ? 'exit-full-screen' : 'full-screen'}
-                                onClick={toggleFullScreen}
-                                variant="icon"
-                            />
+        <div className={styles.departuresPage}>
+            <Wrapper contentType="default" disableContentPaddings={true}>
+                <ContentLayout
+                    header={
+                        <div
+                            className={`${styles.departuresPageHeader} ${
+                                view === 'departures'
+                                    ? styles.departuresHeader
+                                    : styles.weatherHeader
+                            }`}
+                        >
+                            <Box variant="h1">
+                                {view === 'departures' ? 'Upcoming departures' : 'Hourly forecast'}
+                            </Box>
+                            <div className={styles.actions}>
+                                <SegmentedControl
+                                    selectedId={view}
+                                    onChange={({ detail }) =>
+                                        setView(detail.selectedId as 'weather' | 'departures')
+                                    }
+                                    options={[
+                                        { text: 'Departures', id: 'departures' },
+                                        { text: 'Weather', id: 'weather' },
+                                    ]}
+                                />
+                                <Button
+                                    iconName={isFullScreen ? 'exit-full-screen' : 'full-screen'}
+                                    onClick={toggleFullScreen}
+                                    variant="icon"
+                                />
+                            </div>
                         </div>
-                    </div>
-                }
-            >
-                {view === 'weather' &&
-                    hourlyWeatherDetails.map((weather) => (
-                        <WeatherDetailsRow key={weather.date.getUTCSeconds()} data={weather} />
-                    ))}
+                    }
+                >
+                    {view === 'weather' &&
+                        hourlyWeatherDetails.map((weather) => (
+                            <WeatherDetailsRow key={weather.date.getUTCSeconds()} data={weather} />
+                        ))}
 
-                {view === 'departures' &&
-                    nextArrivals.map((data, index) => (
-                        <DepartureDisplay
-                            key={index}
-                            departureTime={data.departureTime}
-                            tripId={data.tripId}
-                            routeId={data.routeId}
-                        />
-                    ))}
-            </ContentLayout>
-        </Wrapper>
+                    {view === 'departures' &&
+                        nextArrivalsByStopId.map((nextArrivals, index) => (
+                            <DepartureDisplaySection
+                                key={index}
+                                stopId={nextArrivals.stopId}
+                                departureDisplayProps={nextArrivals.stopTimes}
+                            />
+                        ))}
+                </ContentLayout>
+            </Wrapper>
+        </div>
     );
 }

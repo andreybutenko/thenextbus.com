@@ -1,3 +1,4 @@
+export const departuresPage: string;
 export const departuresPageHeader: string;
 export const actions: string;
 export const departuresHeader: string;

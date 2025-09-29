@@ -1,0 +1,10 @@
+.departureDisplaySectionHeader {
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1em;
+    border-bottom: 1px solid #023047;
+    text-transform: uppercase;
+
+    margin-top: 16px;
+    padding: 16px;
+}
