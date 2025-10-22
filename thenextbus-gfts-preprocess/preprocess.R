@@ -56,6 +56,20 @@ trip_id_headboard_map <- trip_id_headboard_df %>%
 
 write(trip_id_headboard_map, './processed/trip_id_headboards.json')
 
+# stop_id_details.json
+# Map from stop ID to details
+
+stop_id_details_df <- stops %>% 
+  select(stop_id, stop_name, stop_lat, stop_lon)
+
+stop_id_details_map <- stop_id_details_df %>%
+  group_by(stop_id) %>%
+  nest() %>%
+  deframe() %>%
+  toJSON(auto_unbox = TRUE)
+
+write(stop_id_details_map, './processed/stop_id_details.json')
+
 # trip_id_headboard_df <- stop_times %>%
 #   inner_join(trips, by = "trip_id") %>%
 #   inner_join(routes, by = "route_id") %>% 
