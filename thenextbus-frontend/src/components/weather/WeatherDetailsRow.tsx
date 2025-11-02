@@ -45,13 +45,14 @@ export function WeatherDetailsRow(props: WeatherDetailsRowProps): React.ReactEle
                 )}
                 <div className={styles.primaryContent}>
                     <div className={styles.description}>{props.data.description}</div>
-                    <div className={styles.pop}>
-                        {Math.round(props.data.pop * 100)}% chance of rain
-                    </div>
+                </div>
+                <div className={styles.rain}>
+                    <span className={styles.value}>{Math.round(props.data.pop * 100)}%</span>
+                    <span className={styles.unit}>chance of rain</span>
                 </div>
                 <div className={styles.temperature}>
-                    <span className={styles.temperatureValue}>{Math.round(props.data.temp)}</span>
-                    <span className={styles.temperatureUnit}>&deg;F</span>
+                    <span className={styles.value}>{Math.round(props.data.temp)}</span>
+                    <span className={styles.unit}>&deg;F</span>
                 </div>
             </div>
         </Box>

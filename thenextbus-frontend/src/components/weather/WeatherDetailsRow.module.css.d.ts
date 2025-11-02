@@ -7,5 +7,6 @@ export const primaryContent: string;
 export const description: string;
 export const pop: string;
 export const temperature: string;
-export const temperatureValue: string;
-export const temperatureUnit: string;
+export const rain: string;
+export const value: string;
+export const unit: string;

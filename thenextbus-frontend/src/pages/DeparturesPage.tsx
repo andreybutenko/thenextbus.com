@@ -63,7 +63,13 @@ export function DeparturesPage(): React.ReactElement {
             return [];
         }
 
-        return weatherData.data.hourly;
+        const formattedNow = dayjs().format('MMM D');
+
+        return weatherData.data.hourly.filter((data) => {
+            const formattedDate = dayjs(data.date).format('MMM D');
+
+            return formattedDate === formattedNow;
+        });
     }, [realTimeData]);
 
     return (
